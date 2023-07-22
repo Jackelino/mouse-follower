@@ -4,7 +4,7 @@ import {useEffect, useState} from "react";
 function App() {
     const [enable, setEnable] = useState(false);
     const [position, setPosition] = useState({x: 0, y: 0});
-
+    // pointer move
     useEffect(() => {
         const handleMove = (event) => {
             const {clientX, clientY} = event;
@@ -20,6 +20,13 @@ function App() {
             window.removeEventListener('pointermove', handleMove)
         }
     }, [enable]);
+    // change cursor pointer
+    useEffect(() => {
+        document.body.classList.toggle('no-cursor', enable)
+        return () => {
+            document.body.classList.remove('no-cursor')
+        }
+    }, [enable])
     return (
         <main>
             <div className="circle-mouse" style={{
